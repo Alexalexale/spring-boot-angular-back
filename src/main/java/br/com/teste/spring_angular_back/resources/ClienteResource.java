@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,13 +54,14 @@ public class ClienteResource {
 	}
 	
 	@GetMapping(value = "/page")
-	public ResponseEntity<List<ClienteDTO>> findPage(
+	public ResponseEntity<Page<ClienteDTO>> findPage(
 		@RequestParam(name = "page", defaultValue = "0") Integer page,
 		@RequestParam(name = "linesPage", defaultValue = "6") Integer linesPage,
 		@RequestParam(name = "orderBy", defaultValue = "nome") String orderBy,
 		@RequestParam(name = "direction", defaultValue = "ASC") String direction
 	) {
-		return ResponseEntity.ok(clienteService.findPage(page, linesPage, orderBy, direction).map(ClienteDTO::new));
+		Page<ClienteDTO> clientes = clienteService.findPage(page, linesPage, orderBy, direction).map(ClienteDTO::new);
+		return ResponseEntity.ok(clientes);
 	}
 	
 
