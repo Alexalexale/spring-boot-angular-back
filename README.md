@@ -15,3 +15,6 @@ Com esse endpoints:
   GET-/clientes/page: retorna os clientes paginados
 
   POST-/clientes: para fazer a insert do cliente
+
+
+O banco de dados usado foi o H2, um banco de dados em memoria.
